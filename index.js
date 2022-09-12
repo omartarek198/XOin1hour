@@ -1,13 +1,15 @@
 const { get } = require("http");
-
+ const readline = require("readline").createInterface({
+   input: process.stdin,
+   output: process.stdout,
+ });
 class XO {
-  board = [];
-  currSymbol = 'O';
-
+ 
 
   constructor()
   {
     this.board = []
+  this.currSymbol = 'X'
     for (var i = 0; i < 3; i++) {
       this.board[i] = [];
     }
@@ -57,8 +59,8 @@ class XO {
       // console.log(index);
       // console.log(row)
       if (index > -1) {
-        C = ct;
-        R = index;
+        R = ct;
+        C = index;
         break;
       }
       ct++;
@@ -70,6 +72,7 @@ class XO {
     if (this.board[R][C] != " ") return -1;
     else {
       this.board[R][C] = this.currSymbol;
+      this.currSymbol == 'O' ? this.currSymbol = 'X' : this.currSymbol = 'O'
       return 1;
     }
 
@@ -86,10 +89,7 @@ class XO {
     }
   }
   getCellFromUser() {
-    const readline = require("readline").createInterface({
-      input: process.stdin,
-      output: process.stdout,
-    });
+   
     var cell = 0;
     readline.question("Enter Cell Number", (cell) => {
       cell = this.validate(cell);
@@ -104,13 +104,11 @@ class XO {
         }
         if (result == 1) {
           this.displayBoard();
-          this.currSymbol == "O"
-            ? (this.currSymbo = "X")
-            : (this.currSymbol = "O");
+         
           this.getCellFromUser();
         }
       }
-      readline.close();
+      // readline.close();
     });
   }
 }
