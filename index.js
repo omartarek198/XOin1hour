@@ -1,4 +1,5 @@
 const { get } = require("http");
+const { exit } = require("process");
  const readline = require("readline").createInterface({
    input: process.stdin,
    output: process.stdout,
@@ -74,7 +75,8 @@ class XO {
       this.board[R][C] = this.currSymbol;
       if (this.Connected(R, C) == 1)
       {
-        console.log(this.currSymbol , " won")
+        console.log(this.currSymbol, " won")
+        exit()
         }
       this.currSymbol == 'O' ? this.currSymbol = 'X' : this.currSymbol = 'O'
       return 1;
@@ -99,7 +101,7 @@ class XO {
           ct++;
         }
       }
-      if (ct == 2)
+      if (ct == 3)
       {
         return 1;
       }
@@ -118,8 +120,9 @@ class XO {
           ct++;
         }
       }
-      if (ct == 2) {
+      if (ct == 3) {
         return 1;
+        
       } else {
         ct = 0;
       }
@@ -140,7 +143,11 @@ class XO {
         ct++;
       }
     }
-    if (ct == 2) return 1;
+    if (ct == 3) return 1;
+    else
+    {
+      console.log(ct)
+      }
 
     var j = 2;
       for (i = 0; i < 3; i++) {
@@ -155,7 +162,7 @@ class XO {
         j--;
 
       }
-    if (ct == 2) return 1;
+    if (ct == 3) return 1;
     
 
     return 0;
