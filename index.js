@@ -72,10 +72,91 @@ class XO {
     if (this.board[R][C] != " ") return -1;
     else {
       this.board[R][C] = this.currSymbol;
+      if (this.Connected(R, C) == 1)
+      {
+        console.log(this.currSymbol , " won")
+        }
       this.currSymbol == 'O' ? this.currSymbol = 'X' : this.currSymbol = 'O'
       return 1;
     }
 
+
+    return 0;
+  }
+  Connected(r, c)
+  {
+    var ct = 0;
+    for (var i = 0; i < 3; i++)
+    {
+      ct = 0;
+      for (var k = 0; k < 3; k++)
+      {
+        if (this.board[i][k] != this.currSymbol)
+        {
+          break;  
+        }
+        else {
+          ct++;
+        }
+      }
+      if (ct == 2)
+      {
+        return 1;
+      }
+      else
+      {
+        ct =0
+        }
+    }
+    
+    for (var i = 0; i < 3; i++) {
+      ct = 0;
+      for (var k = 0; k < 3; k++) {
+        if (this.board[k][i] != this.currSymbol) {
+          break;
+        } else {
+          ct++;
+        }
+      }
+      if (ct == 2) {
+        return 1;
+      } else {
+        ct = 0;
+      }
+    }
+
+
+    //diagonals
+
+
+    for (i = 0; i < 3; i++)
+    {
+      if (this.board[i][i] != this.currSymbol)
+      {
+        ct = 0;
+        break;
+      }  
+      else {
+        ct++;
+      }
+    }
+    if (ct == 2) return 1;
+
+    var j = 2;
+      for (i = 0; i < 3; i++) {
+        if (this.board[i][j] != this.currSymbol) {
+          ct = 0;
+
+          break;
+        } else {
+          ct++;
+        }
+
+        j--;
+
+      }
+    if (ct == 2) return 1;
+    
 
     return 0;
   }
